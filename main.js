@@ -1,7 +1,7 @@
 // Suits
 const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
 // Values
-const values = ['1','2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 class Deck {
   constructor() {
@@ -20,15 +20,15 @@ class Deck {
   }
 
   nextCard() {
-    return this.deck.shift();
+    return this.deck.pop();
   }
 }
 
 class Player {
   constructor(name) {
     this.name = name;
-    this.currentDeck = [];
-    this.wonDeck = [];
+    this.hand = [];
+    this.wonDeck = []; 
   }
 }
 
@@ -39,8 +39,29 @@ class Game {
     
   }
 
-  play() {
+  /* 
+  const occurences = [1, 2];
+  const playedCards = [3, 7, 7];
+  const maxValueCard = 7
 
+  findMaxValue(arr, max) {
+    let idx = playedCards.indexOf(maxValueCard);
+    while (idx != -1) {
+      occurences.push(idx);
+      idx = playedCards.indexOf(maxValueCard, idx + 1);
+    }
+  }
+  findMaxValue(playedCards, maxValueCard)
+  */
+
+  play() { 
+    let deckLen = this.gameDeck.deck.length, playedCards = [];
+    // Hand out all the cards to players
+    for (let i = 0; i < deckLen; i++) {
+      this.players[i % this.players.length].hand.push(this.gameDeck.deck[i])
+    }
+
+    // 
   }
 }
 
@@ -60,6 +81,18 @@ console.log(newDeck.deck);
 
 console.log(newDeck.nextCard())
 console.log(newDeck.nextCard())
+
+let playerOne = new Player("Jimmy");
+let playerTwo = new Player("Matt");
+let playerThree = new Player("Nate");
+
+let playerArray = [playerOne, playerTwo, playerThree];
+let newGame = new Game(playerArray)
+newGame.play()
+
+console.log(playerOne);
+console.log(playerTwo);
+console.log(playerThree);
 
 
 
