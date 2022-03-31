@@ -1,3 +1,4 @@
+
 // Suits
 const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
 // Values
@@ -16,6 +17,7 @@ class Deck {
   }
 
   shuffleDeck() {
+    //sort docs https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort/#sect1
     this.deck.sort((a, b) => 0.5 - Math.random());
   }
 
@@ -29,6 +31,11 @@ class Player {
     this.name = name;
     this.hand = [];
     this.wonDeck = []; 
+    this.wonDeck = [];
+  }
+  // method to check hand lenght
+  handSize() {
+    return this.hand.length;
   }
 }
 
@@ -61,19 +68,66 @@ class Game {
       this.players[i % this.players.length].hand.push(this.gameDeck.deck[i])
     }
 
-    // 
+    // while, play another round
+    while (this.players.length > 1) {
+
+      /*
+      * THIS IS WHERE WE PLAY OUR HANDS
+      */
+      
+      function findOccurrences(arr, max) {
+        const occurrences = [];
+      
+        let idx = arr.indexOf(max);
+        while (idx != -1) {
+          occurrences.push(idx);
+          idx = arr.indexOf(max, idx + 1);
+        }
+      
+        return occurrences
+      }
+      
+      const playedCards = [3, 7, 7];
+      const maxCardValue = Math.max(...playedCards);
+      const occurrences = findOccurrences(playedCards, maxCardValue); // [1, 2]
+      
+      if (occurrences.length === 3) {
+        // restart the round
+      } else if (occurrences.length === 2) {
+        // two players go to war
+      } else {
+        // player with max card wins
+      }
+      
+      
+      // At the end of the round
+      // Check the number of cards each player has
+      // If a player has no cards left
+        // Remove them from the players array
+      this.players.forEach((element) => {
+        if(element.handSize === 0) {
+            
+        }        
+      });
+}
+    
+      
+
+    // Print the winner
   }
 }
 
-class Lobby {
-  constructor() {
-    this.players = [];
-  }
 
-  addPlayer(player) {
-    this.players.push(player)
-  }
-}
+
+// class Lobby {
+//   constructor() {
+//     this.players = [];
+//   }
+
+//   addPlayer(player) {
+//     this.players.push(player)
+//   }
+// }
 
 let newDeck = new Deck();
 newDeck.shuffleDeck();
